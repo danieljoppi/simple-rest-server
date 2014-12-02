@@ -11,5 +11,5 @@ module.exports = function(mongoose, Schema) {
         fullName: { type: String }
     });
 
-    return mongoose.model('User', userSchema);
+    return mongoose.model('user', userSchema);
 };
