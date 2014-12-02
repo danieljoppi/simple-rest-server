@@ -17,10 +17,6 @@ var port = process.env.PORT || 80; 		// set our port
 // =============================================================================
 var router = express.Router(); 				// get an instance of the express Router
 
-router.get('/', function(req, res) {
-    res.send("server online...");
-});
-
 var routes = require('./routes/route-config')(app, router);
 
 mongoose.connect('mongodb://localhost/simple', function(err, res) {
