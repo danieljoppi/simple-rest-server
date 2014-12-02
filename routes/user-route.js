@@ -3,9 +3,9 @@
  * @since 2/12/14.
  */
     //File: routes/tvshows.js
-module.exports = function(router) {
+module.exports = function(mongoose, router) {
 
-    var user = require('../models/user-model.js');
+    var User = mongoose.model('User');
 
     //Link routes and functions
 

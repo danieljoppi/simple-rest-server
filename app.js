@@ -15,13 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // for parsing multipart/form-data
 //app.use(multer());
 
-var port = process.env.PORT || 80; 		// set our port
-// ROUTES FOR OUR API
-// =============================================================================
-var router = express.Router(); 				// get an instance of the express Router
-
-var routes = require('./routes/route-config')(router);
-
+// Start MondgoDB connect
 mongoose.connect('mongodb://localhost/simple', function(err, res) {
     if(err) {
         console.log('ERROR: connecting to Database. ' + err);
@@ -30,7 +24,14 @@ mongoose.connect('mongodb://localhost/simple', function(err, res) {
     }
 });
 
-// more routes for our API will happen here
+var routes = require('./models/model-config')(app, mongoose);
+
+var port = process.env.PORT || 80; 		// set our port
+// ROUTES FOR OUR API
+// =============================================================================
+var router = express.Router(); 		// get an instance of the express Router
+
+var routes = require('./routes/route-config')(app, mongoose, router);
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
