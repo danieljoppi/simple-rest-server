@@ -3,14 +3,14 @@
  * @since 2/12/14.
  */
     //File: routes/tvshows.js
-module.exports = function(app) {
+module.exports = function(router) {
 
     var user = require('../models/user-model.js');
 
     //Link routes and functions
 
     //GET - Return all users in the DB
-    app.get('/user', function(req, res) {
+    router.get('/user', function(req, res) {
         user.find(function(err, users) {
             if(!err) {
                 console.log('GET /user');
@@ -21,7 +21,7 @@ module.exports = function(app) {
         });
     });
     //GET - Return a user with specified ID
-    app.get('/user/:id', function(req, res) {
+    router.get('/user/:id', function(req, res) {
         user.findById(req.params.id, function(err, user_) {
             if(!err) {
                 console.log('GET /user/' + req.params.id);
@@ -32,7 +32,7 @@ module.exports = function(app) {
         });
     });
     //POST - Insert a new user in the DB
-    app.post('/user', function(req, res) {
+    router.post('/user', function(req, res) {
         console.log('POST');
         console.log(req.body);
 
@@ -54,7 +54,7 @@ module.exports = function(app) {
         res.send(user_);
     });
     //PUT - Update a register already exists
-    app.put('/user/:id', function(req, res) {
+    router.put('/user/:id', function(req, res) {
             user.findById(req.params.id, function(err, user_) {
                 user_.name     = req.body.name     || user_.name;
                 user_.lastName = req.body.lastName || user_.lastName;
@@ -72,7 +72,7 @@ module.exports = function(app) {
             });
         });
     //DELETE - Delete a TVShow with specified ID
-    app.delete('/user/:id', function(req, res) {
+    router.delete('/user/:id', function(req, res) {
         user.findById(req.params.id, function(err, user_) {
             user_.remove(function(err) {
                 if(!err) {

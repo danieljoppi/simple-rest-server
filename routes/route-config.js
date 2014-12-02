@@ -2,8 +2,8 @@
  * @author daniel.joppi
  * @since 2/12/14.
  */
-module.exports = function(app) {
+module.exports = function(router) {
 
     // list routes
-    require('./user-route.js')(app);
+    require('./user-route.js')(router);
 };

@@ -4,21 +4,25 @@
  */
 var express  = require("express"),
     app      = express(),
-    http     = require("http"),
+    bodyParser = require('body-parser'),
     server   = http.createServer(app),
     mongoose = require('mongoose');
 
-app.configure(function () {
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(app.router);
-});
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/', function(req, res) {
+var port = process.env.PORT || 80; 		// set our port
+// ROUTES FOR OUR API
+// =============================================================================
+var router = express.Router(); 				// get an instance of the express Router
+
+router.get('/', function(req, res) {
     res.send("server online...");
 });
 
-var routes = require('./routes/route-config')(app);
+var routes = require('./routes/route-config')(app, router);
 
 mongoose.connect('mongodb://localhost/simple', function(err, res) {
     if(err) {
@@ -28,6 +32,13 @@ mongoose.connect('mongodb://localhost/simple', function(err, res) {
     }
 });
 
-server.listen(80, function() {
-    console.log("Node server running on http://localhost:80");
-});
+// more routes for our API will happen here
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use('/api', router);
+
+// START THE SERVER
+// =============================================================================
+app.listen(port);
+console.log('start server on port ' + port);
