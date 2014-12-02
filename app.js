@@ -7,17 +7,20 @@ var express  = require("express"),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose');
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+
+// for parsing application/json
+app.use(bodyParser.json());
+// for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser());
+// for parsing multipart/form-data
+//app.use(multer());
 
 var port = process.env.PORT || 80; 		// set our port
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); 				// get an instance of the express Router
 
-var routes = require('./routes/route-config')(app, router);
+var routes = require('./routes/route-config')(router);
 
 mongoose.connect('mongodb://localhost/simple', function(err, res) {
     if(err) {
