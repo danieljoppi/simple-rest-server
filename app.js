@@ -10,7 +10,7 @@ var express  = require("express"),
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser());
 
 var port = process.env.PORT || 80; 		// set our port
 // ROUTES FOR OUR API
