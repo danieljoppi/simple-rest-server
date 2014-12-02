@@ -5,7 +5,6 @@
 var express  = require("express"),
     app      = express(),
     bodyParser = require('body-parser'),
-    server   = http.createServer(app),
     mongoose = require('mongoose');
 
 // configure app to use bodyParser()
