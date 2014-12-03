@@ -2,7 +2,6 @@
  * @author daniel.joppi
  * @since 2/12/14.
  */
-    //File: routes/tvshows.js
 module.exports = function(mongoose, router) {
 
     var userDB = mongoose.model('user');
@@ -56,10 +55,9 @@ module.exports = function(mongoose, router) {
     //PUT - Update a register already exists
     router.put('/user/:id', function (req, res) {
         userDB.findById(req.params.id, function (err, user_) {
-            user_.name = req.body.name || user_.name;
-            user_.lastName = req.body.lastName || user_.lastName;
-            user_.birthday = req.body.birthday || user_.birthday;
-            user_.fullName = req.body.fullName || user_.fullName;
+            for (var attr in req.body) {
+                user_[attr] = req.body[attr] || user_[attr];
+            }
 
             user_.save(function (err) {
                 if (!err) {

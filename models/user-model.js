@@ -8,7 +8,12 @@ module.exports = function(mongoose, Schema) {
         name: { type: String },
         lastName: { type: String },
         birthday: { type: Date },
-        fullName: { type: String }
+        fullName: { type: String },
+        email: { type: String },
+        location: { type: String },
+        locationRange: { type: Number },
+        facebookConnect: { type: Boolean },
+        linkedinConnect: { type: Boolean }
     });
 
     return mongoose.model('user', userSchema);
