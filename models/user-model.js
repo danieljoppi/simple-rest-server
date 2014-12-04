@@ -14,7 +14,7 @@ module.exports = function(mongoose, Schema) {
         locationRange: { type: Number },
         facebookConnect: { type: Boolean },
         linkedinConnect: { type: Boolean },
-        photo: { type: String } // id to image
+        photo: { type: String }
     });
 
     mongoose.model('user', schema_);
