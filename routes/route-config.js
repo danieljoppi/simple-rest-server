@@ -19,4 +19,5 @@ module.exports = function(app, mongoose, router) {
 
     // list routes
     require('./generic-route.js')(mongoose, router);
+    require('./image-route.js')(mongoose, router);
 };

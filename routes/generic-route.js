@@ -20,10 +20,10 @@ module.exports = function(mongoose, router) {
     //GET - Return a user with specified ID
     router.get('/:entity/:id', function (req, res) {
         var db = mongoose.model(req.params.entity);
-        db.findById(req.params.id, function (err, user_) {
+        db.findById(req.params.id, function (err, data_db) {
             if (!err) {
                 console.log('GET /user/' + req.params.id);
-                res.send(user_);
+                res.send(data_db);
             } else {
                 console.log('ERROR: ' + err);
             }
@@ -35,9 +35,9 @@ module.exports = function(mongoose, router) {
         console.log('POST');
         console.log(req.body);
 
-        var user_ = new db(req.body);
+        var data_db = new db(req.body);
 
-        user_.save(function (err) {
+        data_db.save(function (err) {
             if (!err) {
                 console.log('Created');
             } else {
@@ -45,31 +45,31 @@ module.exports = function(mongoose, router) {
             }
         });
 
-        res.send(user_);
+        res.send(data_db);
     });
     //PUT - Update a register already exists
     router.put('/:entity/:id', function (req, res) {
         var db = mongoose.model(req.params.entity);
-        db.findById(req.params.id, function (err, user_) {
+        db.findById(req.params.id, function (err, data_db) {
             for (var attr in req.body) {
-                user_[attr] = req.body[attr] || user_[attr];
+                data_db[attr] = req.body[attr] || data_db[attr];
             }
 
-            user_.save(function (err) {
+            data_db.save(function (err) {
                 if (!err) {
                     console.log('Updated');
                 } else {
                     console.log('ERROR: ' + err);
                 }
-                res.send(user_);
+                res.send(data_db);
             });
         });
     });
     //DELETE - Delete a TVShow with specified ID
     router.delete('/:entity/:id', function (req, res) {
         var db = mongoose.model(req.params.entity);
-        db.findById(req.params.id, function (err, user_) {
-            user_.remove(function (err) {
+        db.findById(req.params.id, function (err, data_db) {
+            data_db.remove(function (err) {
                 if (!err) {
                     console.log('Removed');
                 } else {

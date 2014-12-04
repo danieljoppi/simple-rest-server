@@ -4,11 +4,12 @@
  */
 module.exports = function(mongoose, Schema) {
 
-    var userSchema = new Schema({
+    var schema_ = new Schema({
         name: { type: String },
         lastName: { type: String },
         birthday: { type: Date },
         fullName: { type: String },
+        photo: { type: String }, // id to image
         email: { type: String },
         location: { type: String },
         locationRange: { type: Number },
@@ -16,5 +17,5 @@ module.exports = function(mongoose, Schema) {
         linkedinConnect: { type: Boolean }
     });
 
-    return mongoose.model('user', userSchema);
+    mongoose.model('user', schema_);
 };
