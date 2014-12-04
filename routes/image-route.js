@@ -2,9 +2,9 @@
  * Created by daniel.joppi on 12/4/14.
  */
 
-module.exports = function(router, mongoose) {
+module.exports = function(router, db) {
     router.post('/image', function (req, res, next) {
-        var image_db = new mongoose.model('image')();
+        var image_db = new db.model('image')();
         image_db.title = req.body.title;
         image_db.description = req.body.description;
         var data;

@@ -2,80 +2,89 @@
  * @author daniel.joppi
  * @since 2/12/14.
  */
-module.exports = function(router, mongoose) {
+module.exports = function(router, db) {
+    var BSON = db.bson;
     //Link routes and functions
 
     //GET - Return all users in the DB
     router.get('/:entity', function (req, res) {
-        var db = mongoose.model(req.params.entity);
-        db.find(function (err, users) {
-            if (!err) {
-                console.log('GET /user');
-                res.send(users);
-            } else {
-                console.log('ERROR: ' + err);
-            }
+        var entity = req.params.entity;
+
+        db.collection(entity, function(err, collection) {
+            collection.find().toArray(function(err, items) {
+                if (!err) {
+                    console.log('GET /'+entity);
+                    res.send(items);
+                } else {
+                    console.log('ERROR: ' + err);
+                }
+            });
         });
     });
     //GET - Return a user with specified ID
     router.get('/:entity/:id', function (req, res) {
-        var db = mongoose.model(req.params.entity);
-        db.findById(req.params.id, function (err, data_db) {
-            if (!err) {
-                console.log('GET /user/' + req.params.id);
-                res.send(data_db);
-            } else {
-                console.log('ERROR: ' + err);
-            }
+        var entity = req.params.entity;
+        var id = req.params.id;
+
+        db.collection('wines', function(err, collection) {
+            collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
+                if (err) {
+                    console.log('GET /user/' + id);
+                    res.send({"_id": id, status: "error", error: err});
+                } else {
+                    res.send(item);
+                }
+            });
         });
     });
     //POST - Insert a new user in the DB
     router.post('/:entity', function (req, res) {
-        var db = mongoose.model(req.params.entity);
-        console.log('POST');
-        console.log(req.body);
+        var entity = req.params.entity;
 
-        var data_db = new db(req.body);
-
-        data_db.save(function (err) {
-            if (!err) {
-                console.log('Created');
-            } else {
-                console.log('ERROR: ' + err);
-            }
+        var data = req.body;
+        db.collection(entity, function(err, collection) {
+            collection.insert(data, {safe:true}, function(err, result) {
+                if (err) {
+                    res.send({"_id": id, status: "error", error: err});
+                } else {
+                    console.log('Success: ' + JSON.stringify(result[0]));
+                    res.send({"_id": id, status: "inserted"});
+                }
+            });
         });
-
-        res.send(data_db);
     });
     //PUT - Update a register already exists
     router.put('/:entity/:id', function (req, res) {
-        var db = mongoose.model(req.params.entity);
-        db.findById(req.params.id, function (err, data_db) {
-            for (var attr in req.body) {
-                data_db[attr] = req.body[attr] || data_db[attr];
-            }
+        var entity = req.params.entity;
+        var id = req.params.id;
+        var data = req.body;
 
-            data_db.save(function (err) {
-                if (!err) {
-                    console.log('Updated');
+        db.collection(entity, function(err, collection) {
+            collection.update({'_id':new BSON.ObjectID(id)}, data, {safe:true}, function(err, result) {
+                if (err) {
+                    console.log('Error updating wine: ' + err);
+                    res.send({"_id": id, status: "error", error: err});
                 } else {
-                    console.log('ERROR: ' + err);
+                    console.log('' + result + ' document(s) updated');
+                    res.send({"_id": id, status: "updated"});
                 }
-                res.send(data_db);
             });
         });
     });
     //DELETE - Delete a TVShow with specified ID
     router.delete('/:entity/:id', function (req, res) {
-        var db = mongoose.model(req.params.entity);
-        db.findById(req.params.id, function (err, data_db) {
-            data_db.remove(function (err) {
-                if (!err) {
-                    console.log('Removed');
+        var entity = req.params.entity;
+        var id = req.params.id;
+
+        db.collection(entity, function(err, collection) {
+            collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+                if (err) {
+                    res.send({"_id": id, status: "error", error: err});
                 } else {
-                    console.log('ERROR: ' + err);
+                    console.log('' + result + ' document(s) deleted');
+                    res.send({"_id": id, status: "deleted"});
                 }
-            })
+            });
         });
     });
 

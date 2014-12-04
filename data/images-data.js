@@ -12,7 +12,7 @@ module.exports = function(mongoose, Schema) {
     schema_.plugin(attachments, {
         directory: 'achievements',
         storage: {
-            providerName: '-aws2js',
+            providerName: 'aws2js',
             options: {
                 key: '<key>',
                 secret: '<secret>',

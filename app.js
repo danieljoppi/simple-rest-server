@@ -5,7 +5,7 @@
 var express  = require("express"),
     app      = express(),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    mongo = require('mongodb');
 
 
 // for parsing application/json
@@ -16,22 +16,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(multer());
 
 // Start MondgoDB connect
-mongoose.connect('mongodb://localhost/simple', function(err, res) {
-    if(err) {
-        console.log('ERROR: connecting to Database. ' + err);
-    } else {
-        console.log('Connected to Database');
-    }
-});
-
-var routes = require('./models/model-config')(mongoose);
+var db = require('./config/database')(mongo);
+//populate DB
+require('./data/populate-db-config')(db);
 
 var port = process.env.PORT || 80; 		// set our port
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); 		// get an instance of the express Router
 
-var routes = require('./routes/route-config')(router, mongoose);
+var routes = require('./routes/route-config')(router, db);
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
