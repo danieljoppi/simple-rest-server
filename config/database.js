@@ -6,7 +6,7 @@ module.exports = function(mongo) {
         Db = mongo.Db;
 
     var server = new Server('localhost', 27017, {auto_reconnect: true});
-    var db = new Db('simple', server);
+    var db = new Db('simple', server, {safe: true});
 
     db.open(function(err, db) {
         if(err) {
