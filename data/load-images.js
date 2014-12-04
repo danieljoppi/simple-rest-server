@@ -10,14 +10,14 @@ module.exports = function(db) {
     return function(image) {
         var stream = gfs.createWriteStream({
             filename: image.name,
-            contentType: image.type
+            contentType: 'image/'+image.type
         });
         request.get(image.url)
             .on('error', function(err) {
                 console.log(err)
             })
             .pipe(stream);
-        console.log(stream);
+
         return stream.id;
     };
 };

@@ -20,9 +20,9 @@ module.exports = function(router, db) {
     });
 
     // get image to url
-    router.get('/image/:name', function (req, res) {
+    router.get('/image/:id', function (req, res) {
         var stream = gfs.createReadStream({
-            filename: req.params.name
+            id: req.params.id
         });
         //error handling, e.g. file does not exist
         stream.on('error', function (err) {
