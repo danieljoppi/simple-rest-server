@@ -20,6 +20,7 @@
     "mongodb": "^1.4.22",
     "mongoose": "^3.8.20",
     "mongoose-attachments": "^0.1.0",
+    "mongoose-attachments-aws2js": "^1.0.0",
     "mongoose-file": "0.0.2",
     "mongoskin": "^1.4.4"
   },
