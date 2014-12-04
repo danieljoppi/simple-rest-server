@@ -9,12 +9,12 @@ module.exports = function(mongoose, Schema) {
         lastName: { type: String },
         birthday: { type: Date },
         fullName: { type: String },
-        photo: { type: String }, // id to image
         email: { type: String },
         location: { type: String },
         locationRange: { type: Number },
         facebookConnect: { type: Boolean },
-        linkedinConnect: { type: Boolean }
+        linkedinConnect: { type: Boolean },
+        photo: { type: String } // id to image
     });
 
     mongoose.model('user', schema_);
