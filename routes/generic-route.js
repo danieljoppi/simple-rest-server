@@ -14,7 +14,7 @@ module.exports = function(router, db) {
             collection.find().toArray(function(err, items) {
                 if (err) {
                     console.log('ERROR: ' + err);
-                    res.send({entity: entity, status: "error", error: err});
+                    res.send({entity: entity, status: "error", msg: ""+err});
                 } else {
                     console.log('GET /'+entity);
                     res.send(items);
@@ -28,14 +28,14 @@ module.exports = function(router, db) {
         var id = req.params.id;
 
         db.collection(entity, function(err, collection) {
-            if(!collection) {
-                res.send({"_id": id, entity: entity, status: "error", error: 'porra'+ err});
+            if(err) {
+                res.send({"_id": id, entity: entity, status: "error", msg: ""+ err});
                 return;
             }
 
             collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
                 if (err) {
-                    res.send({"_id": id, entity: entity, status: "error", error: err});
+                    res.send({"_id": id, entity: entity, status: "error", msg: ""+err});
                 } else {
                     console.log('GET /'+entity+'/' + id);
                     res.send(item);
@@ -51,7 +51,7 @@ module.exports = function(router, db) {
         db.collection(entity, function(err, collection) {
             collection.insert(data, {safe:true}, function(err, result) {
                 if (err) {
-                    res.send({entity: entity, status: "error", error: err});
+                    res.send({entity: entity, status: "error", msg: ""+err});
                 } else {
                     console.log('POST /'+entity);
                     res.send({"_id": result[0].id, entity: entity, status: "inserted"});
@@ -69,7 +69,7 @@ module.exports = function(router, db) {
             collection.update({'_id':new BSON.ObjectID(id)}, data, {safe:true}, function(err, result) {
                 if (err) {
                     console.log('Error updating wine: ' + err);
-                    res.send({"_id": id, entity: entity, status: "error", error: err});
+                    res.send({"_id": id, entity: entity, status: "error", msg: ""+err});
                 } else {
                     console.log('PUT /'+entity+'/' + id);
                     res.send({"_id": id, entity: entity, status: "updated"});
@@ -85,7 +85,7 @@ module.exports = function(router, db) {
         db.collection(entity, function(err, collection) {
             collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
                 if (err) {
-                    res.send({"_id": id, entity: entity, status: "error", error: err});
+                    res.send({"_id": id, entity: entity, status: "error", msg: ""+err});
                 } else {
                     console.log('DELETE /'+entity+'/' + id);
                     res.send({"_id": id, entity: entity, status: "deleted"});
