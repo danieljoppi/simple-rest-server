@@ -31,8 +31,7 @@ module.exports = function(db) {
     };
 
     // list populate data
-    require('./companies-data.js')(verify);
-    //require('./images-data.js')(verify);
-    require('./locations-data.js')(verify);
-    require('./users-data.js')(verify);
+    require('./datadb-companies.js')(verify, db);
+    require('./datadb-locations.js')(verify);
+    require('./datadb-users.js')(verify);
 };
