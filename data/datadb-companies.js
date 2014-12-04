@@ -71,6 +71,6 @@ module.exports = function(verify, db) {
         {name: 'n64', image: loadImage({url:'http://coinarcade.files.wordpress.com/2013/02/n64-logo.gif', name: 'n64-logo.jpg', type: 'jpg'}) },
         {name: 'gloria', image: loadImage({url:'http://gloria-project.eu/wp-content/uploads/2012/06/logo-256-transp.png', name: 'gloria-logo.png', type: 'png'}) }
     ];
-    console.log(data);
+
     verify('company', data);
 };

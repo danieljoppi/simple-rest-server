@@ -26,7 +26,7 @@ module.exports = function(router, db) {
         var entity = req.params.entity;
         var id = req.params.id;
 
-        db.collection('wines', function(err, collection) {
+        db.collection(entity, function(err, collection) {
             collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
                 if (err) {
                     console.log('GET /user/' + id);
