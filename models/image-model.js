@@ -17,7 +17,7 @@ module.exports = function(mongoose, Schema) {
                 key: '<key>',
                 secret: '<secret>',
                 bucket: '<bucket>',
-                endpoint: 'https://' + options.bucket + '.s3.amazonaws.com',
+               // endpoint: 'https://' + options.bucket + '.s3.amazonaws.com',
                 acl: "public-read" // false or "private" by default
             }
         },
