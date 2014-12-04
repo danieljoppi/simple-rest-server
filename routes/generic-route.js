@@ -2,7 +2,7 @@
  * @author daniel.joppi
  * @since 2/12/14.
  */
-module.exports = function(mongoose, router) {
+module.exports = function(router, mongoose) {
     //Link routes and functions
 
     //GET - Return all users in the DB

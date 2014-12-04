@@ -2,7 +2,7 @@
  * @author daniel.joppi
  * @since 2/12/14.
  */
-module.exports = function(app, mongoose, router) {
+module.exports = function(router, mongoose) {
 
     router.all('/', function(req, res, next) {
         // set origin policy etc so cross-domain access wont be an issue
@@ -18,6 +18,6 @@ module.exports = function(app, mongoose, router) {
     });
 
     // list routes
-    require('./generic-route.js')(mongoose, router);
-    require('./image-route.js')(mongoose, router);
+    require('./generic-route.js')(router, mongoose);
+    require('./image-route.js')(router, mongoose);
 };

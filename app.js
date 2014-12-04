@@ -24,14 +24,14 @@ mongoose.connect('mongodb://localhost/simple', function(err, res) {
     }
 });
 
-var routes = require('./models/model-config')(app, mongoose);
+var routes = require('./models/model-config')(mongoose);
 
 var port = process.env.PORT || 80; 		// set our port
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); 		// get an instance of the express Router
 
-var routes = require('./routes/route-config')(app, mongoose, router);
+var routes = require('./routes/route-config')(router, mongoose);
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
