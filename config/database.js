@@ -9,7 +9,9 @@ module.exports = function(mongo) {
     var db = new Db('simple', server);
 
     db.open(function(err, db) {
-        if(!err) {
+        if(err) {
+            console.log("Cannot connect to 'simple' database: "+err);
+        } else {
             console.log("Connected to 'simple' database");
         }
     });
