@@ -4,8 +4,7 @@
  */
 var express  = require("express"),
     app      = express(),
-    bodyParser = require('body-parser'),
-    mongo = require('mongodb');
+    bodyParser = require('body-parser');
 
 
 // for parsing application/json
@@ -16,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(multer());
 
 // Start MondgoDB connect
-var db = require('./config/database')(mongo);
+var db = require('./config/database')();
 
 var port = process.env.PORT || 80; 		// set our port
 // ROUTES FOR OUR API

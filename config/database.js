@@ -2,8 +2,9 @@
  * Created by daniel.joppi on 12/4/14.
  */
 module.exports = function(mongo) {
-    var Server = mongo.Server,
-        Db = mongo.Db;
+    var mongo = require('mongodb');
+    var Server = mongo.Server;
+    var Db = mongo.Db;
 
     var server = new Server('localhost', 27017, {auto_reconnect: true});
     var db = new Db('simple', server, {safe: true});

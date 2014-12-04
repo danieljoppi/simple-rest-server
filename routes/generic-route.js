@@ -3,7 +3,8 @@
  * @since 2/12/14.
  */
 module.exports = function(router, db) {
-    var BSON = db.bson;
+    var mongo = require('mongodb');
+    var BSON = mongo.BSONPure;
     //Link routes and functions
 
     //GET - Return all users in the DB
@@ -27,10 +28,9 @@ module.exports = function(router, db) {
         var id = req.params.id;
 
         var collection = db.collection(entity);
-        console.log(BSON, BSON.ObjectID);
-        collection.findOne({'_id': id}, function (err, item) {
+        collection.findOne({'_id': new BSON.ObjectID(id)}, function (err, item) {
             if (err) {
-                res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
+                res.sen({"_id": id, entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('GET /' + entity + '/' + id);
                 res.send(item);
