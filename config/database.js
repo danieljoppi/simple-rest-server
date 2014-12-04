@@ -13,6 +13,9 @@ module.exports = function(mongo) {
             console.log("Cannot connect to 'simple' database: "+err);
         } else {
             console.log("Connected to 'simple' database");
+
+            //populate DB
+            require('../data/populate-db-config')(db);
         }
     });
 

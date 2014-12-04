@@ -17,8 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Start MondgoDB connect
 var db = require('./config/database')(mongo);
-//populate DB
-require('./data/populate-db-config')(db);
 
 var port = process.env.PORT || 80; 		// set our port
 // ROUTES FOR OUR API
