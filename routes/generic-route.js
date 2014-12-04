@@ -27,9 +27,14 @@ module.exports = function(router, db) {
         var id = req.params.id;
 
         db.collection(entity, function(err, collection) {
+            if(err) {
+                res.send({"_id": id, status: "error", error: err});
+                return;
+            }
+
             collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
                 if (err) {
-                    console.log('GET /user/' + id);
+                    console.log('GET /'+entity+'/' + id);
                     res.send({"_id": id, status: "error", error: err});
                 } else {
                     res.send(item);
