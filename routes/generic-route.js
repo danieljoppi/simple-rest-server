@@ -29,15 +29,15 @@ module.exports = function(router, db) {
 
         db.collection(entity, function(err, collection) {
             if(!collection) {
-                res.send({"_id": id, entity: entity, status: "error", error: err});
+                res.send({"_id": id, entity: entity, status: "error", error: 'porra'+ err});
                 return;
             }
 
             collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
                 if (err) {
-                    console.log('GET /'+entity+'/' + id);
                     res.send({"_id": id, entity: entity, status: "error", error: err});
                 } else {
+                    console.log('GET /'+entity+'/' + id);
                     res.send(item);
                 }
             });
@@ -53,7 +53,7 @@ module.exports = function(router, db) {
                 if (err) {
                     res.send({entity: entity, status: "error", error: err});
                 } else {
-                    console.log('Success: ' + JSON.stringify(result[0]));
+                    console.log('POST /'+entity);
                     res.send({"_id": result[0].id, entity: entity, status: "inserted"});
                 }
             });
@@ -71,7 +71,7 @@ module.exports = function(router, db) {
                     console.log('Error updating wine: ' + err);
                     res.send({"_id": id, entity: entity, status: "error", error: err});
                 } else {
-                    console.log('' + result + ' document(s) updated');
+                    console.log('PUT /'+entity+'/' + id);
                     res.send({"_id": id, entity: entity, status: "updated"});
                 }
             });
@@ -87,7 +87,7 @@ module.exports = function(router, db) {
                 if (err) {
                     res.send({"_id": id, entity: entity, status: "error", error: err});
                 } else {
-                    console.log('' + result + ' document(s) deleted');
+                    console.log('DELETE /'+entity+'/' + id);
                     res.send({"_id": id, entity: entity, status: "deleted"});
                 }
             });
