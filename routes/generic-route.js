@@ -28,7 +28,7 @@ module.exports = function(router, db) {
         var id = req.params.id;
 
         db.collection(entity, function(err, collection) {
-            if(err) {
+            if(!collection) {
                 res.send({"_id": id, entity: entity, status: "error", error: err});
                 return;
             }
