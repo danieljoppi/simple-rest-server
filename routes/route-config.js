@@ -18,5 +18,5 @@ module.exports = function(app, mongoose, router) {
     });
 
     // list routes
-    require('./user-route.js')(mongoose, router);
+    require('./generic-route.js')(mongoose, router);
 };
