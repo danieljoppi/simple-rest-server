@@ -18,6 +18,6 @@ module.exports = function(db) {
             })
             .pipe(stream);
         console.log(stream);
-        return stream['_id'];
+        return stream.id;
     };
 };
