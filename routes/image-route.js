@@ -30,6 +30,7 @@ module.exports = function(router, db) {
             throw err;
         });
 
+        res.header("Content-Type", stream.contentType);
         stream.pipe(res);
     });
 };
