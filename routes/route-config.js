@@ -19,6 +19,6 @@ module.exports = function(router, db) {
     });
 
     // list routes
-    require('./generic-route.js')(router, db);
     require('./image-route.js')(router, db);
+    require('./generic-route.js')(router, db);
 };
