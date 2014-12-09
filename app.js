@@ -6,7 +6,8 @@ var express  = require("express"),
     app      = express(),
     bodyParser = require('body-parser');
 
-
+// compress content
+app.use(express.compress());
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
