@@ -12,7 +12,7 @@ app.use(compression({
     threshold: 1024, // ignore 1Kb
     filter: function(req, res) {
         var ct = res.header('content-encoding');
-        console.log('content-encoding - '+res.get('content-encoding'), res.contentType, res.header('content-encoding'));
+        console.log('content-encoding - '+ct);
 
         return ct === 'gzip';
     }
