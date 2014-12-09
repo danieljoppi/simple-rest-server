@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 // compress all request
 app.use(compression({
-    threshold: 1024 // ignore 1Kb
+    threshold: 1024, // ignore 1Kb
     filter: function(req, res) {
         console.log(res);
     }
