@@ -11,12 +11,17 @@ module.exports = function(router, db) {
     // upload image
     router.post('/image', function (req, res) {
         var data = req.body;
-        var stream = gfs.createWriteStream({
-            filename: data.filename,
-            contentType: data.type
-        });
-        req.pipe(stream);
-        res.send(stream);
+        try {
+            var stream = gfs.createWriteStream({
+                filename: data.filename,
+                contentType: data.type
+            });
+            req.pipe(stream);
+            res.statusCode = 200;
+            res.send(stream);
+        } catch(e) {
+            res.statusCode = 500;
+        }
     });
 
     // get image to url
@@ -33,8 +38,8 @@ module.exports = function(router, db) {
         res.header("Content-Type", stream.contentType);
         res.setHeader('Cache-Control', 'no-cache');
         try {
-            stream.pipe(res);
             res.statusCode = 200;
+            stream.pipe(res);
         } catch(e) {
             res.statusCode = 500;
         }

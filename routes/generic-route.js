@@ -15,12 +15,12 @@ module.exports = function(router, db) {
         collection.find().toArray(function (err, items) {
             if (err) {
                 console.log('ERROR: ' + err);
-                res.send({entity: entity, status: "error", msg: "" + err});
                 res.statusCode = 404;
+                res.send({entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('GET /' + entity);
-                res.send(items);
                 res.statusCode = 200;
+                res.send(items);
             }
         });
     });
@@ -32,12 +32,12 @@ module.exports = function(router, db) {
         var collection = db.collection(entity);
         collection.findOne({'_id': new BSON.ObjectID(id)}, function (err, item) {
             if (err) {
-                res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
                 res.statusCode = 404;
+                res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('GET /' + entity + '/' + id);
-                res.send(item);
                 res.statusCode = 200;
+                res.send(item);
             }
         });
     });
@@ -49,12 +49,12 @@ module.exports = function(router, db) {
         var collection = db.collection(entity);
         collection.insert(data, {safe: true}, function (err, result) {
             if (err) {
-                res.send({entity: entity, status: "error", msg: "" + err});
                 res.statusCode = 500;
+                res.send({entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('POST /' + entity);
-                res.send({"_id": result[0].id, entity: entity, status: "inserted"});
                 res.statusCode = 200;
+                res.send({"_id": result[0].id, entity: entity, status: "inserted"});
             }
         });
     });
@@ -68,12 +68,12 @@ module.exports = function(router, db) {
         collection.update({'_id': new BSON.ObjectID(id)}, data, {safe: true}, function (err, result) {
             if (err) {
                 console.log('Error updating wine: ' + err);
-                res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
                 res.statusCode = 500;
+                res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('PUT /' + entity + '/' + id);
-                res.send({"_id": id, entity: entity, status: "updated"});
                 res.statusCode = 200;
+                res.send({"_id": id, entity: entity, status: "updated"});
             }
         });
     });
@@ -85,12 +85,12 @@ module.exports = function(router, db) {
         var collection = db.collection(entity);
         collection.remove({'_id': new BSON.ObjectID(id)}, {safe: true}, function (err, result) {
             if (err) {
-                res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
                 res.statusCode = 500;
+                res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('DELETE /' + entity + '/' + id);
-                res.send({"_id": id, entity: entity, status: "deleted"});
                 res.statusCode = 200;
+                res.send({"_id": id, entity: entity, status: "deleted"});
             }
         });
     });
