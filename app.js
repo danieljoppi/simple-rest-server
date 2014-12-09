@@ -8,7 +8,12 @@ var app      = express();
 var bodyParser = require('body-parser');
 
 // compress all request
-app.use(compression());
+app.use(compression({
+    threshold: 1024 // ignore 1Kb
+    filter: function(req, res) {
+        console.log(res);
+    }
+}));
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded

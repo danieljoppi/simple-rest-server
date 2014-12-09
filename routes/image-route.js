@@ -32,6 +32,11 @@ module.exports = function(router, db) {
 
         res.header("Content-Type", stream.contentType);
         res.setHeader('Cache-Control', 'no-cache');
-        stream.pipe(res);
+        try {
+            stream.pipe(res);
+            res.statusCode = 200;
+        } catch(e) {
+            res.statusCode = 500;
+        }
     });
 };
