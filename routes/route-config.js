@@ -10,7 +10,7 @@ module.exports = function(router, db) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,  Content-Type, Accept");
         res.header("Content-Type", "application/json");
-        res.header('Content-Encoding', 'gzip');
+//        res.header('Content-Encoding', 'gzip');
 
         res.header('Last-Modified', (new Date()).toUTCString());
 
