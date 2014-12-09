@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.9.3",
+    "compression": "^1.2.1",
     "express": "^4.10.4",
     "gridfs-stream": "^0.5.3",
     "mongodb": "^1.4.22",

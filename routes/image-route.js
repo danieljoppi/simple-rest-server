@@ -31,6 +31,7 @@ module.exports = function(router, db) {
         });
 
         res.header("Content-Type", stream.contentType);
+        res.setHeader('Cache-Control', 'no-cache');
         stream.pipe(res);
     });
 };

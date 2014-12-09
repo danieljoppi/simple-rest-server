@@ -2,12 +2,13 @@
  * @author daniel.joppi
  * @since 2/12/14.
  */
-var express  = require("express"),
-    app      = express(),
-    bodyParser = require('body-parser');
+var compression = require('compression');
+var express  = require("express");
+var app      = express();
+var bodyParser = require('body-parser');
 
-// compress content
-app.use(express.compress());
+// compress all request
+app.use(compression());
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
