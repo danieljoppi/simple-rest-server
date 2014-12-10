@@ -5,14 +5,15 @@
 module.exports = function(router, db) {
 
     router.all('*', function(req, res, next) {
-        // set origin policy etc so cross-domain access wont be an issue
+        console.log(req.route, JSON.stringify(req.headers));
 
+        // set origin policy etc so cross-domain access wont be an issue
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,  Content-Type, Accept");
         res.header("Content-Type", "application/json");
 
         res.header('Last-Modified', (new Date()).toUTCString());
-        res.header('Cache-Control', 'public, max-age=60');
+        //res.header('Cache-Control', 'public, max-age=60');
 
         res.statusCode = 200;
         next();
