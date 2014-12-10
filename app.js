@@ -9,13 +9,7 @@ var bodyParser = require('body-parser');
 
 // compress all request
 app.use(compression({
-    threshold: 1024, // ignore 1Kb
-    filter: function(req, res) {
-        var ct = res.get('content-encoding');
-        console.log('content-encoding - '+ct);
-
-        return ct === 'gzip';
-    }
+    threshold: 0
 }));
 // for parsing application/json
 app.use(bodyParser.json());
