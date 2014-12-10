@@ -38,7 +38,6 @@ module.exports = function(router, db) {
         res.header("Content-Type", stream.contentType);
         res.setHeader('Cache-Control', 'no-cache');
         try {
-            res.statusCode = 200;
             stream.pipe(res);
         } catch(e) {
             res.statusCode = 500;

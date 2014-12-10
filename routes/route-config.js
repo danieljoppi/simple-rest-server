@@ -12,7 +12,9 @@ module.exports = function(router, db) {
         res.header("Content-Type", "application/json");
 
         res.header('Last-Modified', (new Date()).toUTCString());
+        res.header('Cache-Control', 'public, max-age=60');
 
+        res.statusCode = 200;
         next();
     });
 

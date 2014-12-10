@@ -19,7 +19,6 @@ module.exports = function(router, db) {
                 res.send({entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('GET /' + entity);
-                res.statusCode = 200;
                 res.send(items);
             }
         });
@@ -36,7 +35,6 @@ module.exports = function(router, db) {
                 res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('GET /' + entity + '/' + id);
-                res.statusCode = 200;
                 res.send(item);
             }
         });
@@ -53,7 +51,6 @@ module.exports = function(router, db) {
                 res.send({entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('POST /' + entity);
-                res.statusCode = 200;
                 res.send({"_id": result[0].id, entity: entity, status: "inserted"});
             }
         });
@@ -72,7 +69,6 @@ module.exports = function(router, db) {
                 res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('PUT /' + entity + '/' + id);
-                res.statusCode = 200;
                 res.send({"_id": id, entity: entity, status: "updated"});
             }
         });
@@ -89,7 +85,6 @@ module.exports = function(router, db) {
                 res.send({"_id": id, entity: entity, status: "error", msg: "" + err});
             } else {
                 console.log('DELETE /' + entity + '/' + id);
-                res.statusCode = 200;
                 res.send({"_id": id, entity: entity, status: "deleted"});
             }
         });
