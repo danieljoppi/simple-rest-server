@@ -3,9 +3,10 @@
  * @since 2/12/14.
  */
 var compression = require('compression');
-var express  = require("express");
-var app      = express();
+var express = require("express");
+var app = express();
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 // compress all request
 app.use(compression());
